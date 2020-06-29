@@ -8,24 +8,25 @@
     <link rel="stylesheet" href="style.css">
   </head>
   <body>
-  <section class="section">
-    <div class="container">
-        <h1 class="title">My toDo items:</h1>
-        <div class="list-container">
-            <ul id="checkbox-list" class="is-medium">
+    <section class="section">
+      <div class="container">
+          <h1 class="title">Add todo item</h1>
+          <div class="form-container">
+            <form id ='todo-form' class='taskForm'>
+              <div class="field has-addons input-btn"> 
+                <input class="input" type="text" placeholder="Task text" id="todo-input">
+                <button id='todo-btn' class="button is-dark">+</button>
+              </div>
+            </form>
+            <h2>Your task</h2>
+            <hr>
+            <ul id="todo-list" class="is-medium">
+              <!-- list tasks here -->
             </ul>
-            <div class="field has-addons">
-                <div class="control control-one">
-                    <input class="input" type="text" placeholder="add todo item" id="new-text">
-                </div>
-                <div class="control">
-                    <button class="button is-dark" id="btnPlusTodo">+</button>
-                    
-                </div>
-            </div>
-        </div> 
-    </div>
-  </section>
-  <script src="./addToDoList.js"></script>
+          </div> 
+      </div>
+    </section>
+  <script src="todoApp.js"></script>
   </body>
 </html>
+

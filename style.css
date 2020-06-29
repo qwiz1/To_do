@@ -5,17 +5,31 @@
     flex-direction: column;
 }
 
-.list-container{
-    min-width: 300px;
+h2{
+    font-size: 24px;
+    font-weight: 600;
+    text-align: center;
+    padding: 20px 0px 0px 0px;
+}
+hr{
+    margin: 5px 0px 10px 0px;
+}
+.form-container{
+    min-width: 700px;
+    
 }
 .list-items{
     display: flex;
-    align-items: center;
+    
     justify-content: space-between;
-    flex-flow: nowrap;
+    flex-flow: row;
     font-size: 20px;
-    padding: 10px 0;
+    padding: 10px 0px 5px 10px;
+    width: 100%;
+
+   
 }
+
 .control-one{
     width: 100%;
 }
@@ -26,4 +40,40 @@
 
 input[type=checkbox]:checked + label{
     text-decoration: line-through;
+}
+
+.is-small{
+    margin: 2px 1px;
+
+}
+.add-description{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+/* ------------------------------------------------------------ */
+.todo{
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: column;
+    border-bottom: 1px solid #ebebeb;
+    
+    
+}
+.todoName{
+    flex-grow: 1;
+    margin: 0 5px;
+}
+
+.time-span{
+    font-size: 12px;
+    opacity: 60%;
+}
+
+#done-true{
+    text-decoration: line-through;
+    opacity: 70%;
 }
