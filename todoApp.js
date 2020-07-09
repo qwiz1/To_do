@@ -6,6 +6,14 @@ const todoInput = document.querySelector('#todo-input');
 const todoDivItem = document.querySelector('todo');
 const todoList = document.querySelector('#todo-list');
 
+const dateOption = {
+    month: 'long', 
+    hour: 'numeric',
+    minute: 'numeric',
+    day: 'numeric',
+    year: 'numeric',
+    weekday: 'long'
+};
 
 todoForm.addEventListener('submit', addTodo);
 todoList.addEventListener('click', removeTodo);
@@ -23,54 +31,46 @@ function loadAndDisplayTasks(){
         
         allTasks.forEach(displayTask);
     }
-    xhr.send()
+    xhr.send();
 }
 loadAndDisplayTasks();
 
 
 function displayTask(todo){
-
     const todoDiv = document.createElement('div'); 
     const listElem = document.createElement('li');
     const spanElem = document.createElement('span');
     const deleteBtn = document.createElement('button');
 
-
     const spanTimeCreated = document.createElement('span');          
 
     const checkBtn = document.createElement('button');
 
-
-//------need to create a normal time display format-----------------------------------------
     const timeCreatedAt = new Date(todo.createdAt);
-    const rightFormat = timeCreatedAt; 
+    const rightFormat = timeCreatedAt.toLocaleString('en-US', dateOption); 
     spanTimeCreated.innerText = `Time of creation: ${rightFormat}`;
-    spanTimeCreated.classList.add('time-span')
+    spanTimeCreated.classList.add('time-span');
 
     todoDiv.classList.add('todo');
     todoDiv.id = `${todo.id}`;
 
     listElem.classList.add('todo-item', 'list-items');                                                                 
 
-    spanElem.classList.add('todoName'); // rename!
+    spanElem.classList.add('todoName'); 
     spanElem.innerText = todo.name;
-    spanElem.id = `done-${todo.done}`
+    spanElem.id = `done-${todo.done}`;
 
     checkBtn.classList.add('button', 'is-dark', 'is-small');
-    checkBtn.id = 'check-btn'
-    checkBtn.innerHTML = '&#10003;';
+    checkBtn.id = 'check-btn';
+    checkBtn.innerHTML = '&#10004;';
    
-
     deleteBtn.classList.add('button', 'is-dark', 'is-small');
     deleteBtn.id = 'delete-todo';
     deleteBtn.innerText = 'Delete';
     
-    
 
     todoDiv.appendChild(listElem);
     listElem.appendChild(spanElem);
-    
-    
     //===========================================
     listElem.appendChild(checkBtn);
     //===========================================
@@ -95,7 +95,6 @@ function addTodo(event){
         }
         xhr.send(JSON.stringify(todoObj));
     
-    
     todoInput.value = '';
 }
 
@@ -105,13 +104,13 @@ function removeTodo(event){
         const parentItem = event.target.parentElement;
         const todoId = parentItem.parentElement.id;
         // console.log(todoId);
-        
-        xhr.open('DELETE', requestURL + `/${todoId}`);
-        xhr.onload = () =>{
-            const deletedObj = JSON.parse(xhr.responseText);
-            console.log(deletedObj);
-        }
-        xhr.send()
+
+            xhr.open('DELETE', requestURL + `/${todoId}`);
+            xhr.onload = () =>{
+                const deletedObj = JSON.parse(xhr.responseText);
+                console.log(deletedObj);
+            }
+            xhr.send()
 
         parentItem.parentElement.remove();
     } 
@@ -122,9 +121,7 @@ function removeTodo(event){
 function todoCompleted(event){
     
     if (event.target.id === 'check-btn'){
-
         const li = event.target.parentElement; 
-
         const todoId = li.parentElement.id;
 
         const xhr = new XMLHttpRequest();
@@ -132,29 +129,20 @@ function todoCompleted(event){
         xhr.open('POST', requestURL + `/${todoId}`);
         xhr.setRequestHeader('content-type', 'application/json');
         
-/*
- it would be fun to put this 
- in a separate function
- */
-        
-        
-        
         if (li.childNodes[0].id === 'done-false'){
             const status = li.childNodes[0].id = 'done-true';
             const statusArr = status.split('-');
             
-            const statusObj = { done: statusArr[1]};
+            const statusObj = {done: statusArr[1]};
 
             xhr.send(JSON.stringify(statusObj));
         }else{
             const status = li.childNodes[0].id = 'done-false';
             const statusArr = status.split('-');
-          
-            const statusObj = { done: statusArr[1]};
+
+            const statusObj = {done: statusArr[1]};
 
             xhr.send(JSON.stringify(statusObj));
         }
-
-    
     }
 }
