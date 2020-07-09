@@ -30,29 +30,11 @@ hr{
    
 }
 
-.control-one{
-    width: 100%;
-}
-
-.task-done{
-    text-decoration: line-through;
-}
-
-input[type=checkbox]:checked + label{
-    text-decoration: line-through;
-}
-
 .is-small{
     margin: 2px 1px;
 
 }
-.add-description{
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-}
 
-/* ------------------------------------------------------------ */
 .todo{
 
     display: flex;
