@@ -8,14 +8,19 @@
     <link rel="stylesheet" href="style.css">
   </head>
   <body>
+    <aside class="alerts">
+        
+  
+    </aside>
     <section class="section">
+      
       <div class="container">
           <h1 class="title">Add todo item</h1>
           <div class="form-container">
             <form id ='todo-form' class='taskForm'>
               <div class="field has-addons input-btn"> 
                 <input class="input" type="text" placeholder="Task text" id="todo-input">
-                <button id='todo-btn' class="button is-dark">+</button>
+                <button id='todo-btn' class="button is-dark">&#10010;</button>
               </div>
             </form>
             <h2>Your task</h2>
@@ -25,7 +30,20 @@
             </ul>
           </div> 
       </div>
+      
     </section>
+    <!-- <aside class="alerts">
+      <div class="alert error">
+        <p>1</p>
+      </div>
+      <div class="alert deleted">
+        <p>2</p>
+      </div>
+      <div class="alert added">
+        <p>3</p>
+      </div>
+
+    </aside> -->
   <script src="todoApp.js"></script>
   </body>
 </html>
