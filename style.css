@@ -87,6 +87,18 @@ aside{
     background-color: lightyellow;
 }
 
+.info {
+    background-color: lightgreen;
+}
+
+.warning{
+    background-color: lightyellow;
+}
+
+.error{
+    background-color: lightsalmon;
+}
+
 @media (max-width: 1200px){
     aside{
         position: relative;
@@ -97,8 +109,6 @@ aside{
         width: 100%;
     }  
     .alert{
-       
-        
         font-size: 18px;
         margin: 1px 0;
         padding: 21px 0;
@@ -106,6 +116,18 @@ aside{
         width: 100%;
         height: 100%;
         border-radius: 5px;
-        background-color: lightyellow;
+        
     }
+
+    
+}
+
+.input-edit{
+    
+    border: 1px solid #ebebeb;
+    border-radius: 5px;
+    height: 32px;
+    margin: 2px;
+    
+    
 }

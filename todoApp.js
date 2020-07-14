@@ -1,11 +1,9 @@
 const requestURL = 'https://solo-todo-app.herokuapp.com/tasks';
 
-
 const todoForm = document.querySelector('#todo-form');
 const todoInput = document.querySelector('#todo-input');
 const todoDivItem = document.querySelector('todo');
 const todoList = document.querySelector('#todo-list');
-
 const asideAlerts = document.querySelector('.alerts')
 
 const dateOption = {
@@ -21,6 +19,7 @@ const dateOption = {
 todoForm.addEventListener('submit', addTodo);
 todoList.addEventListener('click', removeTodo);
 todoList.addEventListener('click', todoCompleted);
+
 
 
 function loadAndDisplayTasks() {
@@ -84,7 +83,6 @@ function displayTask(todo) {
     todoDiv.appendChild(spanTimeCreated);
 }
 
-//need to chenge
 function addTodo(event) {
     event.preventDefault();
     const xhr = new XMLHttpRequest();
@@ -92,9 +90,9 @@ function addTodo(event) {
     const todoObj = { name: taskName }
 
     if (taskName === '') {
-        displayAlert(taskName)
-        
-        return
+        // displayAlert(taskName); 
+        showAlert('warning', 'Please enter a task.')
+        return;
     }
 
     xhr.open('POST', requestURL);
@@ -102,13 +100,14 @@ function addTodo(event) {
     xhr.onload = () => {
         const todoJSON = JSON.parse(xhr.responseText);
         if (todoJSON.name === undefined) {
-            displayAlert()
+            // displayAlert()
+            showAlert('error', 'sorry, failed to add task')
             return;
         };
         // console.log(todoJSON.name)
-        displayAlert(todoJSON.name);
-
         displayTask(todoJSON);
+        showAlert('info', 'Task successfully added')
+        // displayAlert(todoJSON.name);
     }
     xhr.send(JSON.stringify(todoObj));
 
@@ -127,15 +126,14 @@ function removeTodo(event) {
         xhr.onload = () => {
             // const deletedObj = JSON.parse(xhr.responseText);
             // console.log(deletedObj);
-            console.log(event.target.id)
-            displayAlert(event.target.id)
+            // console.log(event.target.id)
+            showAlert('info', 'Task successfully removed')
         }
         xhr.send()
 
         parentItem.parentElement.remove();
     }
 }
-
 
 function todoCompleted(event) {
 
@@ -165,58 +163,72 @@ function todoCompleted(event) {
         }
     }
 }
-//need to chenge
-function displayAlert(event) {
+
+function showAlert(type, text) {
+    
     const alertBlock = document.createElement('div');
     const message = document.createElement('p');
-    
-    alertBlock.classList.add('alert');
+
+    alertBlock.classList.add('alert', type);
     alertBlock.appendChild(message);
+    asideAlerts.appendChild(alertBlock); 
+    message.innerText = text;
 
-    if (event === ''){
-        alertBlock.classList.add('alert');
-        alertBlock.appendChild(message);
-        alertBlock.style.backgroundColor = 'lightyellow';
-        message.innerText = 'Please enter a task.';
-        asideAlerts.appendChild(alertBlock); 
-
-        setTimeout(() => {
-            alertBlock.remove();
-        }, 3000)
-        return
-    }
-    
-    if (event === 'delete-todo') {
-        alertBlock.style.backgroundColor = 'lightcoral';
-        message.innerText = `Task successful deleted.`;
-
-        asideAlerts.appendChild(alertBlock);
-
-        setTimeout(() => {
-            alertBlock.remove();
-        }, 3000);
-    } else if (event) {
-        alertBlock.style.backgroundColor = 'lightgreen';
-
-        message.innerText = 'Task successful added.';
-        asideAlerts.appendChild(alertBlock);
-
-        setTimeout(() => {
-            alertBlock.remove();
-        }, 3000)
-
-    }else{
-        alertBlock.style.backgroundColor = 'lightcoral';
-        // message.innerText = 'Please enter a task.';
-        message.innerText = 'Sorry, a task with the same name already exists.';
-        asideAlerts.appendChild(alertBlock);
-
-        setTimeout(() => {
-            alertBlock.remove();
-        }, 3000)
-
-    }
-
+    setTimeout(() => {
+        alertBlock.remove();
+    }, 3000)
 }
 
+// function displayAlert(event) {
+//     const alertBlock = document.createElement('div');
+//     const message = document.createElement('p');
+    
+//     alertBlock.classList.add('alert');
+//     alertBlock.appendChild(message);
+
+//     if (event === ''){
+//         alertBlock.classList.add('alert');
+//         alertBlock.appendChild(message);
+//         alertBlock.style.backgroundColor = 'lightyellow';
+//         message.innerText = 'Please enter a task.';
+//         asideAlerts.appendChild(alertBlock); 
+
+//         setTimeout(() => {
+//             alertBlock.remove();
+//         }, 3000)
+//         return
+//     }
+    
+//     if (event === 'delete-todo') {
+//         alertBlock.style.backgroundColor = 'lightcoral';
+//         message.innerText = `Task successful deleted.`;
+
+//         asideAlerts.appendChild(alertBlock);
+
+//         setTimeout(() => {
+//             alertBlock.remove();
+//         }, 3000);
+//     } else if (event) {
+//         alertBlock.style.backgroundColor = 'lightgreen';
+
+//         message.innerText = 'Task successful added.';
+//         asideAlerts.appendChild(alertBlock);
+
+//         setTimeout(() => {
+//             alertBlock.remove();
+//         }, 3000)
+
+//     }else{
+//         alertBlock.style.backgroundColor = 'lightcoral';
+//         // message.innerText = 'Please enter a task.';
+//         message.innerText = 'Sorry, a task with the same name already exists.';
+//         asideAlerts.appendChild(alertBlock);
+
+//         setTimeout(() => {
+//             alertBlock.remove();
+//         }, 3000)
+
+//     }
+
+// }
 
